@@ -1,3 +1,14 @@
+
+<?php
+
+require_once 'connect.php';
+
+$stmt = $pdo->prepare('SELECT * FROM books');
+$stmt->execute();
+$aBooks = $stmt->fetchAll();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +17,12 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="assets/app.js"></script>
+    <ul>
+    <?php
+        foreach ($aBooks as $book) {
+            echo '<li><a href="book.php?id=' . $book['id'] . '">' . $book['title'] . '</a></li>';
+        }
+    ?>
+    </ul>
 </body>
 </html>
